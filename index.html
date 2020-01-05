@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+function myAjaxRequest() {
+
+  $.ajax({
+    url: "http://api.nbp.pl/api/exchangerates/rates/c/"+$('input#waluta').val()+"/"+$('input#data').val()+"/?format=json",
+    dataType: 'json',
+    success: function( data ) {
+      $.each(data['rates'], function(i, item) {
+      $('#nr_').text(item.no)
+      $('#data_').text(item.effectiveDate)
+      $('#kwota_').text(item.bid)
+      });
+    },
+    error: function( data ) {
+      var d = new Date($('input#data').val());
+      d.setDate(d.getDate() - 1)
+      document.getElementById('data').valueAsDate = d
+      setTimeout(() => {
+        myAjaxRequest()
+      }, 0)
+    }
+  });
+
+
+  // $('#test').html($('input#data').val())
+ };
+</script>
+
+<h2>Pomocnik Księgowego</h2>
+<p>Wybierz datę kursu NPB i wpisz walutę.</p>
+
+Data Kursu:
+<input type="date" id="data" name="data"><br><br>
+Waluta:
+<input type="text" value="EUR" id="waluta" name="waluta"><br><br>
+<input type='SUBMIT' onclick="myAjaxRequest()" value='Prześlij' name='submit' id='submit' />
+
+<h3>Data</h3>
+<div id="data_">
+</div>
+<h3>Nr wpisu</h3>
+<div id="nr_">
+</div>
+<h3>Kurs uśredniony</h3>
+<h1 id="kwota_">
+</h1><br>
+
+<script>
+document.getElementById('data').valueAsDate = new Date();
+</script>
+</body>
+</html>
