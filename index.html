@@ -18,6 +18,7 @@ function myAjaxRequest() {
       });
     },
     error: function( data ) {
+      console.log("http://api.nbp.pl/api/exchangerates/rates/a/"+$('input#waluta').val()+"/"+$('input#data').val()+"/?format=json");
       var d = new Date($('input#data').val());
       d.setDate(d.getDate() - 1)
       document.getElementById('data').valueAsDate = d
