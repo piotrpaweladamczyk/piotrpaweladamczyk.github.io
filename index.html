@@ -10,6 +10,7 @@ function myAjaxRequest() {
     url: "http://api.nbp.pl/api/exchangerates/rates/a/"+$('input#waluta').val()+"/"+$('input#data').val()+"/?format=json",
     dataType: 'json',
     success: function( data ) {
+      console.log("http://api.nbp.pl/api/exchangerates/rates/a/"+$('input#waluta').val()+"/"+$('input#data').val()+"/?format=json");
       $.each(data['rates'], function(i, item) {
       $('#nr_').text(item.no)
       $('#data_').text(item.effectiveDate)
