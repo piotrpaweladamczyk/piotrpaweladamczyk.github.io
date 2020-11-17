@@ -7,7 +7,7 @@
 function myAjaxRequest() {
 
   $.ajax({
-    url: "http://api.nbp.pl/api/exchangerates/rates/c/"+$('input#waluta').val()+"/"+$('input#data').val()+"/?format=json",
+    url: "http://api.nbp.pl/api/exchangerates/rates/a/"+$('input#waluta').val()+"/"+$('input#data').val()+"/?format=json",
     dataType: 'json',
     success: function( data ) {
       $.each(data['rates'], function(i, item) {
